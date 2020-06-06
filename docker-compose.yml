@@ -28,7 +28,6 @@ services:
         - 8000:80
       volumes:
         - ./src/:/app/
-        - ./vendor:/vendor
       links:
         - mariadb
 
