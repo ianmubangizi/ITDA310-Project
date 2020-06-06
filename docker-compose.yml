@@ -22,6 +22,15 @@ services:
           - /sessions
       links:
           - mariadb
+  frontend:
+      image: webdevops/php-nginx
+      ports:
+        - 8000:80
+      volumes:
+        - ./src/:/app/
+        - ./vendor:/vendor
+      links:
+        - mariadb
 
 volumes: 
     database: {}
