@@ -1,6 +1,6 @@
 <?php
 
-namespace Hospital\Objects\Domain;
+namespace Hospital\Domain;
 
 class User
 {

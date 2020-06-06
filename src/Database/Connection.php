@@ -1,11 +1,11 @@
 <?php
 
-namespace Hospital\Objects;
+namespace Hospital\Database;
 
 use PDO;
 use PDOException;
 
-class Database {
+class Connection {
     private $host = "mariadb";
     private $username = "root";
     private $password = "project";
