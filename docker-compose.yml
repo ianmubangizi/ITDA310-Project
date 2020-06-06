@@ -27,9 +27,11 @@ services:
       ports:
         - 8000:80
       volumes:
-        - ./src/:/app/
+        - ./:/app/
       links:
         - mariadb
+      environment:
+        - WEB_DOCUMENT_ROOT=/app/src
 
 volumes: 
     database: {}
