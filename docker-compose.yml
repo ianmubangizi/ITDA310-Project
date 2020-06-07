@@ -2,6 +2,7 @@ version: "2"
 services:
   mariadb:
       image: mariadb
+      container_name: mariadb
       environment:
           - MYSQL_ROOT_PASSWORD=project
           - MYSQL_DATABASE=BroadReach
@@ -23,15 +24,14 @@ services:
       links:
           - mariadb
   frontend:
-      image: webdevops/php-nginx
+      image: webdevops/php-apache
+      container_name: frontend
       ports:
         - 8000:80
       volumes:
         - ./:/app/
       links:
         - mariadb
-      environment:
-        - WEB_DOCUMENT_ROOT=/app/src
 
 volumes: 
     database: {}
