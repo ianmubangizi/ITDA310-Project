@@ -1,6 +1,9 @@
-<?php
+<?php include "includes/header.php"; ?>
+    <main>
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
 
-?>
-<h1>
-    Dashboard
-</h1>
+            </div>
+        </div>
+    </main>
+<?php include "includes/footer.php"; ?>

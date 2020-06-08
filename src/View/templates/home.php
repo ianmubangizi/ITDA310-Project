@@ -1,17 +1,3 @@
-<?php use Hospital\View\Home as HomePage;
-
-
-$_SESSION['alert'] = array(
-    "error" => "",
-    "message" => "Welcome - Hospital",
-    "dismissed" => true
-);
-
-$page = new HomePage();
-
-//header("Location: /dashboard");
-
-?>
 <?php include "includes/header.php" ?>
 <main>
     <div class="container-fluid">
