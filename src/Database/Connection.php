@@ -21,5 +21,6 @@ class Connection {
         } catch (PDOException $ex) {
             echo "PDOException Error: ".$ex->getMessage();
         }
+        return null;
     }
 }
