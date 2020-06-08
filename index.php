@@ -1,21 +1,23 @@
 <?php
 
-use Hospital\View\Dashboard;
-use Hospital\View\Home;
 use Hospital\View\Page;
 
 require_once "vendor/autoload.php";
+include "src/Utils/instances.php";
+session_start();
 
-$location = $_SERVER['REQUEST_URI'];
-switch ($location) {
-    case "/":
-        (new Home)->render($location);
+$route->add($home);
+$route->add($dashboard);
+
+switch ($path = $route->get_url()) {
+    case $home->link:
+        $home->render($path);
         break;
-    case "/dashboard":
-        (new Dashboard)->render($location);
+    case $dashboard->link:
+        $dashboard->render($path);
         break;
     default:
-        Page::render_not_found($location);
+        Page::render_not_found($path);
         break;
 }
-print_r($location);
+

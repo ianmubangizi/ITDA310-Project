@@ -6,9 +6,8 @@ namespace Hospital\View;
 
 class Home extends Page
 {
-    public function __construct()
+    protected function __construct()
     {
-        parent::__construct("Home", "templates/home.php");
+        parent::__construct('index', "/",'Home', "templates/home.php");
     }
-
 }

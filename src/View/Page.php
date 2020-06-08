@@ -2,45 +2,36 @@
 
 namespace Hospital\View;
 
-abstract class Page extends Routes
+use Hospital\Domain\Singleton;
+
+abstract class Page extends Singleton
 {
-    private $page_name;
-    protected static $template;
-    private static $styles = ["main.css"];
-    private static $page_title = "BroadReach -";
+    public $name;
+    public $link;
+    public $title;
+    private $template;
+    private $page_title = "BroadReach";
 
-    public function __construct($name, $template)
+    protected function __construct($name, $link,$title, $template)
     {
-        $this->page_name = $name;
-        self::$template = $template;
-        self::$page_title = self::$page_title . " " . $name;
+        $this->link = $link;
+        $this->name = $name;
+        $this->title = $title;
+        $this->template = $template;
+        $this->page_title = "$this->page_title - $title";
+        parent::__construct();
     }
 
-    public static function getTitle()
+    public function render($location)
     {
-        return self::$page_title;
+        Route::set_current($this->name);
+        Route::get($location, Route::get_url(), $this->template);
     }
 
-    /**
-     * @return string[]
-     */
-    public static function getStyles()
+    public static function render_not_found($location)
     {
-        $links = [];
-        foreach (self::$styles as $css_file) {
-            array_push($links, "<link rel=\"stylesheet\" href=\"/static/css/$css_file\">");
-        }
-        return $links;
+        Route::get($location, Route::get_url(), "templates/404.php");
     }
-
-    public function render($location){
-        self::get($location, Routes::getURI(), self::$template);
-    }
-
-    public static function render_not_found($location){
-        self::get($location, Routes::getURI(), "templates/404.php");
-    }
-
 }
 
 

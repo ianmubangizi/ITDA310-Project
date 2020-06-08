@@ -6,9 +6,8 @@ namespace Hospital\View;
 
 class Dashboard extends Page
 {
-    public function __construct()
+    protected function __construct()
     {
-        parent::__construct("Dashboard", "templates/dashboard.php");
+        return parent::__construct('dashboard', '/dashboard', "Dashboard", "templates/dashboard.php");
     }
-
 }
