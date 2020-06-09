@@ -1,11 +1,11 @@
 <?php
 
+use Hospital\View\Index;
 use Hospital\View\Dashboard;
-use Hospital\View\Home;
-use Hospital\View\Route;
+use Hospital\View\Core\Route;
 
-$home = Home::instance();
 $route = Route::instance();
+$index = Index::instance();
 $dashboard = Dashboard::instance();
 
 
