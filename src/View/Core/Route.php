@@ -1,13 +1,14 @@
 <?php
 
 
-namespace Hospital\View;
+namespace Hospital\View\Core;
 
 use Hospital\Domain\Singleton;
 
 class Route extends Singleton
 {
     private static $current = "";
+    private static $views = "/app/src/View/templates/";
 
     protected function __construct()
     {
@@ -17,8 +18,9 @@ class Route extends Singleton
     public static function get($location, $url, $view)
     {
         if (preg_match("($location)", $url)) {
-            if (file_exists(__DIR__ . "/" . $view)) {
-                include $view;
+            $template = self::$views . $view;
+            if (file_exists($template)) {
+                include $template;
             }
         }
     }
@@ -30,12 +32,13 @@ class Route extends Singleton
 
     public function add($page)
     {
-        if(!isset($_SESSION['routes'][$page->name])){
+        if (!isset($_SESSION['routes'][$page->name])) {
             $_SESSION['routes'][$page->name] = $page;
         }
     }
 
-    public static function get_routes() {
+    public static function get_routes()
+    {
         return $_SESSION['routes'];
     }
 

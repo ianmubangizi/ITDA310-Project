@@ -1,17 +1,19 @@
 <?php
 
-use Hospital\View\Page;
+use Hospital\View\Core\Page;
 
-require_once "vendor/autoload.php";
-include "src/Utils/instances.php";
+require_once 'vendor/autoload.php';
+require_once 'src/Utils/instances.php';
+
 session_start();
-
-$route->add($home);
+$route->add($index);
 $route->add($dashboard);
 
 switch ($path = $route->get_url()) {
-    case $home->link:
-        $home->render($path);
+    case $index->link:
+        $index->render($path);
+        $index->handle_get($_GET);
+        $index->handle_post($_POST);
         break;
     case $dashboard->link:
         $dashboard->render($path);
