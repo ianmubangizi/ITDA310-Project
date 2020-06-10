@@ -23,4 +23,7 @@ class Employee extends Entity
         parent::__construct($id,  'Employee');
     }
 
+    public function get_by_email($email){
+        return (new Employee)->select("SELECT * FROM Employee WHERE email = '$email';")[0];
+    }
 }
