@@ -5,9 +5,10 @@ namespace Hospital\View\Core;
 
 use Hospital\Domain\Singleton;
 
-class Route extends Singleton
+class Route extends Singleton implements Handler
 {
     private static $current = "";
+    private static $handlers = array();
     private static $views = "/app/src/View/templates/";
 
     protected function __construct()
@@ -35,6 +36,12 @@ class Route extends Singleton
         if (!isset($_SESSION['routes'][$page->name])) {
             $_SESSION['routes'][$page->name] = $page;
         }
+        return $this;
+    }
+
+    public function add_handler($handler){
+        array_push(self::$handlers, $handler);
+        return $this;
     }
 
     public static function get_routes()
@@ -56,6 +63,20 @@ class Route extends Singleton
     public static function current()
     {
         return self::$current;
+    }
+
+    public static function handle_get($request)
+    {
+        foreach (self::$handlers as $handler) {
+            $handler->handle_get($request);
+        }
+    }
+
+    public static function handle_post($request)
+    {
+        foreach (self::$handlers as $handler) {
+            $handler->handle_post($request);
+        }
     }
 
 }
