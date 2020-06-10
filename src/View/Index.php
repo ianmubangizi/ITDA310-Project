@@ -3,7 +3,7 @@
 
 namespace Hospital\View;
 
-
+use Hospital\Domain\Models\Core\Employee;
 use Hospital\View\Core\Handler;
 use Hospital\View\Core\Page;
 
@@ -11,7 +11,7 @@ class Index extends Page implements Handler
 {
     protected function __construct()
     {
-        parent::__construct('index', "/", 'Index, to gain Access', "login.php", array(
+        parent::__construct('index', "/", 'Please Login', "login.php", array(
             'css' => ['login.css'],
             'js' => []
         ));
@@ -24,6 +24,19 @@ class Index extends Page implements Handler
 
     public static function handle_post($request)
     {
-        var_dump(isset($request['submit']));
+        if(isset($request['submit-login'])){
+            list('email' => $email, 'password' => $password) = $request;
+            self::handle_login($email, $password);
+        }
+    }
+
+    public static function handle_login($email, $password)
+    {
+        $user = (new Employee)->get_by_email($email);
+        if($user->password === $password){
+            header('Location: /dashboard');
+        } else {
+            echo "Incorrect";
+        }
     }
 }
