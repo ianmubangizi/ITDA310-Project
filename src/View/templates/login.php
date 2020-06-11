@@ -1,8 +1,4 @@
-<?php use Hospital\Domain\Models\Core\District;
-
-include "includes/header.php";
-var_dump((new District(null,0))->get_hospitals());
-?>
+<?php ?>
 <main>
     <div class="container-fluid my-5 pt-5">
         <div class="justify-content-md-center">
