@@ -8,7 +8,5 @@ $route = Route::instance();
 $index = Index::instance();
 $dashboard = Dashboard::instance();
 
-
-
-
-
+$env = Dotenv\Dotenv::createImmutable($_SERVER['WEB_DOCUMENT_ROOT']);
+$env->load();
