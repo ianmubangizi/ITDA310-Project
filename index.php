@@ -3,7 +3,7 @@
 use Hospital\View\Core\Page;
 
 require_once 'vendor/autoload.php';
-require_once 'src/Utils/instances.php';
+require_once 'src/Util/instances.php';
 
 session_start();
 $route->add($dashboard);
