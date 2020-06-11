@@ -1,4 +1,4 @@
-<?php ?>
+<?php include "includes/header.php"; ?>
 <main>
     <div class="container-fluid my-5 pt-5">
         <div class="justify-content-md-center">
