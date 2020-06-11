@@ -17,7 +17,7 @@ abstract class Connection
     {
         $this->host = $_SERVER['DB_HOST'] ?: "mariadb";
         $this->username = $_SERVER['DB_USER'] ?: "root";
-        $this->password = $_SERVER['DB_USER'] ?: "project";
+        $this->password = $_SERVER['DB_PASSWORD'] ?: "project";
         $this->database = $_SERVER['DB_NAME'] ?: "BroadReach";
         var_dump($_SERVER['DB_HOST']);
     }
