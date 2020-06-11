@@ -40,7 +40,6 @@ class Route extends Singleton implements Handler
 
     public function add_handler($handler)
     {
-        var_dump($this->handlers);
         array_push($this->handlers, $handler);
         return $this;
     }

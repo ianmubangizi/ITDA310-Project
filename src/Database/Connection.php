@@ -1,22 +1,33 @@
 <?php
 
 namespace Hospital\Database;
+
 use PDO;
 use PDOException;
 
 abstract class Connection
 {
-    private static $host = "mariadb";
-    private static $username = "root";
-    private static $password = "project";
-    private static $database = "BroadReach";
 
-    public static function connect()
+    private $host;
+    private $username;
+    private $password;
+    private $database;
+
+    protected function __construct()
     {
-        $dsn = "mysql:host=" . self::$host . ";dbname=" . self::$database . ";";
+        $this->host = $_SERVER['DB_HOST'] ?: "mariadb";
+        $this->username = $_SERVER['DB_USER'] ?: "root";
+        $this->password = $_SERVER['DB_USER'] ?: "project";
+        $this->database = $_SERVER['DB_NAME'] ?: "BroadReach";
+        var_dump($_SERVER['DB_HOST']);
+    }
+
+    public function connect()
+    {
+        $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->database . ";";
 
         try {
-            $pdo = new PDO($dsn, self::$username, self::$password);
+            $pdo = new PDO($dsn, $this->username, $this->password);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;

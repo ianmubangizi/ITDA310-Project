@@ -17,6 +17,7 @@ abstract class Entity extends Connection implements Table
             $this->id = $id;
         }
         $this->table = $table_name;
+        parent::__construct();
     }
 
     public function id_or_default($id)
