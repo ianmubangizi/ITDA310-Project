@@ -6,6 +6,6 @@ namespace Hospital\View\Core;
 
 interface Handler
 {
-    public static function handle_get($request);
-    public static function handle_post($request);
+    public function handle_get($request);
+    public function handle_post($request);
 }

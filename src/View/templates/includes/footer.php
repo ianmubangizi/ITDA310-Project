@@ -1,4 +1,4 @@
-<?php include 'src/Utils/instances.php';
+<?php include 'src/Util/instances.php';
 if (!is_current($index->name)): ?>
     <footer>
         Footer

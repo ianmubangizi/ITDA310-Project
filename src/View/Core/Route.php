@@ -7,9 +7,8 @@ use Hospital\Domain\Singleton;
 
 class Route extends Singleton implements Handler
 {
-    private static $current = "";
-    private static $handlers = array();
-    private static $views = "/app/src/View/templates/";
+    private $current = null;
+    private $handlers = array();
 
     protected function __construct()
     {
@@ -19,7 +18,7 @@ class Route extends Singleton implements Handler
     public static function get($location, $url, $view)
     {
         if (preg_match("($location)", $url)) {
-            $template = self::$views . $view;
+            $template = dirname(__DIR__) . "/templates/" . $view;
             if (file_exists($template)) {
                 include $template;
             }
@@ -39,8 +38,10 @@ class Route extends Singleton implements Handler
         return $this;
     }
 
-    public function add_handler($handler){
-        array_push(self::$handlers, $handler);
+    public function add_handler($handler)
+    {
+        var_dump($this->handlers);
+        array_push($this->handlers, $handler);
         return $this;
     }
 
@@ -49,32 +50,26 @@ class Route extends Singleton implements Handler
         return $_SESSION['routes'];
     }
 
-    /**
-     * @param mixed $current
-     */
-    public static function set_current($current)
+    public function set_current($current)
     {
-        self::$current = $current;
+        $this->current = $current;
     }
 
-    /**
-     * @return string
-     */
-    public static function current()
+    public function current()
     {
-        return self::$current;
+        return $this->current;
     }
 
-    public static function handle_get($request)
+    public function handle_get($request)
     {
-        foreach (self::$handlers as $handler) {
+        foreach ($this->handlers as $handler) {
             $handler->handle_get($request);
         }
     }
 
-    public static function handle_post($request)
+    public function handle_post($request)
     {
-        foreach (self::$handlers as $handler) {
+        foreach ($this->handlers as $handler) {
             $handler->handle_post($request);
         }
     }

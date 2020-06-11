@@ -17,14 +17,14 @@ class Index extends Page implements Handler
         ));
     }
 
-    public static function handle_get($request)
+    public function handle_get($request)
     {
 
     }
 
-    public static function handle_post($request)
+    public function handle_post($request)
     {
-        if(isset($request['submit-login'])){
+        if (isset($request['submit-login'])) {
             list('email' => $email, 'password' => $password) = $request;
             self::handle_login($email, $password);
         }
@@ -33,7 +33,7 @@ class Index extends Page implements Handler
     public static function handle_login($email, $password)
     {
         $user = (new Employee)->get_by_email($email);
-        if($user->password === $password){
+        if ($user->password === $password) {
             header('Location: /dashboard');
         } else {
             echo "Incorrect";

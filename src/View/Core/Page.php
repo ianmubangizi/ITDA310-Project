@@ -27,7 +27,7 @@ abstract class Page extends Singleton
 
     public function render($location)
     {
-        Route::set_current($this->name);
+        Route::instance()->set_current($this->name);
         Route::get($location, Route::get_url(), $this->template);
     }
 
