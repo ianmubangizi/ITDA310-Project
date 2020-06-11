@@ -1,4 +1,10 @@
-<?php include "includes/header.php"; ?>
+<?php include "includes/header.php";
+
+if(!isset($_SESSION['user'])){
+    header("Location: /");
+}
+
+?>
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">

@@ -4,9 +4,10 @@
 namespace Hospital\View;
 
 
+use Hospital\View\Core\Handler;
 use Hospital\View\Core\Page;
 
-class Dashboard extends Page
+class Dashboard extends Page implements Handler
 {
     protected function __construct()
     {
@@ -14,5 +15,17 @@ class Dashboard extends Page
             'css' => ['dashboard.css'],
             'js' => []
         ));
+    }
+
+    public function handle_get($request)
+    {
+        if (isset($request['profile'])) {
+
+        }
+    }
+
+    public function handle_post($request)
+    {
+
     }
 }

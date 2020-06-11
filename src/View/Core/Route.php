@@ -17,8 +17,13 @@ class Route extends Singleton implements Handler
 
     public static function get($location, $url, $view)
     {
+
+        $template = dirname(__DIR__) . "/templates/" . $view;
         if (preg_match("($location)", $url)) {
-            $template = dirname(__DIR__) . "/templates/" . $view;
+            if (file_exists($template)) {
+                include $template;
+            }
+        } elseif ($location === $url) {
             if (file_exists($template)) {
                 include $template;
             }

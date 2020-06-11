@@ -34,6 +34,7 @@ class Index extends Page implements Handler
     {
         $user = (new Employee)->get_by_email($email);
         if ($user->password === $password) {
+            $_SESSION['user'] = $user;
             header('Location: /dashboard');
         } else {
             echo "Incorrect";

@@ -11,3 +11,7 @@ function is_current($name)
 {
     return get_current_page()->name === $name;
 }
+
+function get_login_user(){
+    return $_SESSION['user'];
+}
