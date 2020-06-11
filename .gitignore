@@ -2,4 +2,3 @@ sql
 .env
 .idea/
 /vendor
-.htaccess
