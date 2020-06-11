@@ -19,26 +19,31 @@ abstract class Entity extends Connection implements Table
         $this->table = $table_name;
     }
 
+    public function id_or_default($id)
+    {
+        return !isset($id) && isset($this->id) ? $this->id : ($id ?: 0);
+    }
+
     public function delete($id)
     {
-        return self::connect()->exec("DELETE FROM $this->table  WHERE id = $id;");
+        return $this->connect()->exec("DELETE FROM $this->table  WHERE id = $id;");
     }
 
     public function select($statement)
     {
-        return self::connect()->query($statement)->fetchAll(PDO::FETCH_CLASS);
+        return $this->connect()->query($statement)->fetchAll(PDO::FETCH_CLASS);
     }
 
     public function insert(array $fields)
     {
         $string = self::insert_string($fields, sizeof($fields));
-        return self::connect()->exec("INSERT INTO $this->table ${string['key']}  VALUES ${string['value']};");
+        return $this->connect()->exec("INSERT INTO $this->table ${string['key']}  VALUES ${string['value']};");
     }
 
     public function update(array $fields, $cond)
     {
         $string = self::update_string($fields, sizeof($fields));
-        return self::connect()->exec("UPDATE $this->table SET $string WHERE $cond;");
+        return $this->connect()->exec("UPDATE $this->table SET $string WHERE $cond;");
     }
 
     private static function update_string($values, $length, $string = "")
@@ -58,7 +63,7 @@ abstract class Entity extends Connection implements Table
             'value' => $start
         );
         foreach ($values as $index => $value) {
-            $array['key'] = self::make_string($array, $length, $index, 'key', $div, $end);
+            $array['key'] = self::make_string($array, $length, "`$index`", 'key', $div, $end);
             $array['value'] = self::make_string($array, $length, $value, 'value', $div, $end);
             $length--;
         }
