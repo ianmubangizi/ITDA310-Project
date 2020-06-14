@@ -1,0 +1,20 @@
+{
+    "name": "mubangizi/itda",
+    "description": "ITDA310 Database project for BroadReach Hospital",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ian Mubangizi",
+            "email": "io@ianmubangizi.com"
+        }
+    ],
+    "require": {
+      "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hospital\\": "."
+        }
+    }
+}
