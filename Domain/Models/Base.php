@@ -6,12 +6,12 @@ namespace Hospital\Domain\Models;
 use Hospital\Database\Connection;
 use PDO;
 
-abstract class Entity extends Connection implements Table
+class Base extends Connection implements Table
 {
     protected $id;
     protected $table;
 
-    public function __construct($id, $table_name)
+    public function __construct($table_name = '', $id = null)
     {
         if (isset($id)) {
             $this->id = $id;
@@ -30,7 +30,7 @@ abstract class Entity extends Connection implements Table
         return $this->connect()->exec("DELETE FROM $this->table  WHERE id = $id;");
     }
 
-    public function select($statement)
+    public function query($statement)
     {
         return $this->connect()->query($statement)->fetchAll(PDO::FETCH_CLASS);
     }

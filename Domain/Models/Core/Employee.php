@@ -3,31 +3,25 @@
 
 namespace Hospital\Domain\Models\Core;
 
-
-use Hospital\Domain\Models\Entity;
-
-class Employee extends Entity
+class Employee extends Person
 {
-    private $age, $email, $phone, $gender, $hospital, $first_name, $last_name, $password;
+    private $work_email, $work_phone, $work_place, $occupation, $password;
 
     public function __construct($args = null, $id = null)
     {
         if (isset($args)) {
-            $this->age = $args['age'];
-            $this->email = $args['email'];
-            $this->phone = $args['phone'];
-            $this->gender = $args['gender'];
-            $this->hospital = $args['hospital'];
-            $this->first_name = $args['first_name'];
-            $this->last_name = $args['last_name'];
+            $this->work_email = $args['work_email'];
+            $this->work_phone = $args['work_phone'];
+            $this->work_place = $args['work_place'];
+            $this->occupation = $args['occupation'];
             $this->password = $args['password'];
         }
-        parent::__construct($id, 'Employee');
+        parent::__construct('Employee', $args, $id);
     }
 
     public function get_by_email($email)
     {
-        return (new Employee)->select("SELECT * FROM Employee WHERE email = '$email';")[0];
+        return $this->query("SELECT * FROM Employee WHERE work_email = '$email';")[0];
     }
 
     public static function add_employee($age, $email, $phone, $gender, $hospital, $first_name, $last_name, $password)
