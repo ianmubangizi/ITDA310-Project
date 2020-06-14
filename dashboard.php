@@ -9,7 +9,7 @@ include 'includes/data/dashboard.php';
 ?>
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <nav id="sidebar-menu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <?php foreach ($pages as $key => $p): ?>
@@ -60,7 +60,7 @@ include 'includes/data/dashboard.php';
                 </div>
                 <?php switch ($page) {
                     case "$treatments_link/" . split_url($page):
-                        include 'includes/partials/treatment_table.php';
+                        include 'includes/partials/treatments.php';
                         break;
                     case '/dashboard.php/patients':
                         include 'includes/partials/patients.php';
@@ -75,6 +75,7 @@ include 'includes/data/dashboard.php';
                         include 'includes/partials/appointments.php';
                         break;
                     default:
+                        include 'includes/partials/dashboard.php';
                         break;
                 } ?>
             </main>

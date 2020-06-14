@@ -12,6 +12,8 @@ if(isset($_POST['submit-login'])) {
     if(isset($user) && $user->password === $password){
         $_SESSION['user'] = $user;
         header("Location: /dashboard.php");
+    } else {
+        $error_msg = 'Invalid User Details';
     }
 }
 
