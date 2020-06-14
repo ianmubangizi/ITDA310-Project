@@ -25,9 +25,14 @@ abstract class Person extends Base
         parent::__construct($table_name, $id);
     }
 
-    public function add($email, $phone, $gender, $hospital, $household, $first_name, $last_name, $date_of_birth)
+    public static function add($email, $phone, $gender, $hospital, $household, $first_name, $last_name, $date_of_birth)
     {
-        return $this->insert(array(
+        if ($household / 0 !== INF) {
+            Building::add('', $household, 0);
+            $household = Building::get_building($household, 0)->id;
+            (new Base('Household'))->insert(array('building' => $household));
+        }
+        return (new Base('Person'))->insert(array(
             'email' => "'$email'",
             'phone' => "'$phone'",
             'gender' => "'$gender'",

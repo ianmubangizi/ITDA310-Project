@@ -21,7 +21,7 @@ class Employee extends Person
 
     public function get_by_email($email)
     {
-        return $this->query("SELECT * FROM Employee WHERE work_email = '$email';")[0];
+        return $this->query("SELECT * FROM Employee join Person P on Employee.person = P.id WHERE work_email = '$email';")[0];
     }
 
     public static function add_employee($age, $email, $phone, $gender, $hospital, $first_name, $last_name, $password)

@@ -18,4 +18,8 @@ class District extends Base
         }
         parent::__construct('District', $id);
     }
+
+    public static function get_all_unique(){
+        return (new District)->query("SELECT * FROM District group by location");
+    }
 }
