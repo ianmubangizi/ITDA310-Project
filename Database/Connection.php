@@ -15,10 +15,10 @@ abstract class Connection
 
     protected function __construct()
     {
-        $this->host = $_SERVER['DB_HOST'] ?: "mariadb";
-        $this->username = $_SERVER['DB_USER'] ?: "root";
-        $this->password = $_SERVER['DB_PASSWORD'] ?: "project";
-        $this->database = $_SERVER['DB_NAME'] ?: "BroadReach";
+        $this->host = "mariadb";
+        $this->username = "root";
+        $this->password = "project";
+        $this->database = "BroadReach";
     }
 
     public function connect()

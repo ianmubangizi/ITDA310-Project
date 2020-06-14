@@ -1,8 +1,25 @@
-<?php include "includes/header.php"; ?>
+<?php
+
+use Hospital\Domain\Models\Core\Employee;
+
+$current = 'login';
+include "includes/header.php";
+
+
+if(isset($_POST['submit-login'])) {
+    list('email' => $email, 'password' => $password) = $_POST;
+    $user = (new Employee)->get_by_email($email);
+    if(isset($user) && $user->password === $password){
+        $_SESSION['user'] = $user;
+        header("Location: /dashboard.php");
+    }
+}
+
+?>
 <main>
     <div class="container-fluid my-5 pt-5">
         <div class="justify-content-md-center">
-            <form class="form-signin" method="post" action="<?php echo $index->link ?>">
+            <form class="form-signin" method="post" action="">
                 <div class="text-center mb-4">
                     <h1 class="h3 mb-3 font-weight-normal">BroadReach - Health System</h1>
                 </div>
