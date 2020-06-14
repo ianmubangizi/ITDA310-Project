@@ -3,7 +3,8 @@
 $current = 'dashboard';
 $page = $_SERVER['REQUEST_URI'];
 include "includes/header.php";
-include 'includes/data/dashboard.php'
+include 'includes/helpers/functions.php';
+include 'includes/data/dashboard.php';
 
 ?>
     <div class="container-fluid">
@@ -26,11 +27,9 @@ include 'includes/data/dashboard.php'
                     </ul>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Treatment Reports</span>
-                        <a class="d-flex align-items-center text-muted"
-                           href="<?php echo $treatments_link ?>"
-                           aria-label="View Top Reports">
+                        <a>
                             <span data-feather="database"></span>
+                            Treatment Reports
                         </a>
                     </h6>
 
@@ -53,13 +52,31 @@ include 'includes/data/dashboard.php'
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-5 mt-5 mb-5">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <?php if ("$treatments_link/" . explode('/', $page)[4] === $page): ?>
+                    <?php if ("$treatments_link/" . split_url($page) === $page): ?>
                         <h1 class="h2">Treatment Reports</h1>
                     <?php else: ?>
                         <h1 class="h2"><?php echo $pages[$page]['title'] ?></h1>
                     <?php endif; ?>
                 </div>
-                <?php include 'includes/partials/treatment_table.php' ?>
+                <?php switch ($page) {
+                    case "$treatments_link/" . split_url($page):
+                        include 'includes/partials/treatment_table.php';
+                        break;
+                    case '/dashboard.php/patients':
+                        include 'includes/partials/patients.php';
+                        break;
+                    case '/dashboard.php/hospitals':
+                        include 'includes/partials/hospitals.php';
+                        break;
+                    case '/dashboard.php/employees':
+                        include 'includes/partials/employees.php';
+                        break;
+                    case '/dashboard.php/appointments':
+                        include 'includes/partials/appointments.php';
+                        break;
+                    default:
+                        break;
+                } ?>
             </main>
         </div>
     </div>

@@ -3,8 +3,8 @@
 
 use Hospital\Domain\Models\Base;
 
-$treatments = (new Base)->query("SELECT * FROM Treatment");
 $treatments_link = '/dashboard.php/reports/treatments';
+$treatments = (new Base)->query("SELECT * FROM Treatment");
 $pages = array(
     '/dashboard.php' => array(
         'title' => 'Dashboard',
@@ -28,7 +28,7 @@ $pages = array(
     )
 );
 
-$_key = explode('/', $page)[4] - 1;
+$_key = split_url($page) - 1;
 if ($page === "$treatments_link/" . ($_key + 1)) {
     $_name = $treatments[$_key]->name;
     $district_treatments = (new Base)->query("call get_district_treatments('$_name')");
